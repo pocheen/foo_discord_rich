@@ -9,6 +9,8 @@
 #include "uploader.h"
 #include <fb2k/artwork_metadb.h>
 
+#include <string>
+
 namespace drp::internal
 {
 
@@ -320,6 +322,14 @@ void PresenceModifier::UpdateDuration( double time )
     {
         pd->presence.startTimestamp = 0;
         pd->presence.endTimestamp = std::time( nullptr ) + std::max<uint64_t>( 0, std::llround( pd->trackLength - time ) );
+
+        break;
+    }
+    case config::TimeSetting::Combined:
+    {
+        string dividerStr = " / ";
+        pd->presence.startTimestamp = std::time( nullptr ) - std::llround( time );
+        pd->presence.endTimestamp = std::time( nullptr ) + str + std::llround( pd->trackLength );
 
         break;
     }

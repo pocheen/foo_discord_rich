@@ -15,6 +15,7 @@ enum class TimeSetting : uint8_t
 {
     Elapsed = 0,
     Remaining,
+    Combined = 0,
     Disabled
 };
 
